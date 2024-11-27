@@ -1,0 +1,65 @@
+.color{
+    color: #89b5d6;
+}
+
+
+.margin{
+    margin: 4px;
+}
+
+body{
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+.header{
+    color: #89b5d6;
+    color: #89b5d6;
+    font-weight: bolder;
+}
+
+
+.custom-confirm-button1 {
+    background-color: #89b5d6 !important;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none !important; 
+    box-shadow: none !important; 
+}
+
+.custom-confirm-button2 {
+    background-color: #e34b05 !important;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none !important; 
+    box-shadow: none !important; 
+}
+
+.custom-confirm-button3 {
+    background-color: #89b5d6 !important;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none !important; 
+    box-shadow: none !important; 
+}
+
+.board div img:hover{
+    transform: scale(1.1);
+    color: #f094a6d4;
+}
+
+.board img {
+    width: 100%;
+    height: auto;
+}
