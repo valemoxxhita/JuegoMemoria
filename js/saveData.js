@@ -35,6 +35,9 @@ function mostrarDatos (){
         if(a.attempts < b.attempts){
             return 1;
         }
+        if(a.timeleft > b.timeleft){
+            return -1;
+        }
     });
     jugadores.forEach((jugador, i) => {
         let fila = d.createElement("tr");

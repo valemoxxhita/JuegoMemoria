@@ -31,6 +31,7 @@ let sonidoVictoria = new Audio ("./sounds/win.mp3");
 let sonidoDerrota = new Audio ("./sounds/derrota.mp3");
 let sonidoTiempo = new Audio ("./sounds/clock.mp3");
 let sonidoBackground = new Audio ("./sounds/soundtrack.mp3");
+    sonidoBackground.loop = true;
 let mostrarJugador = d.getElementsByClassName("player");
 let tabla = d.querySelector(".records tbody");
 let imgLevel1 = [
@@ -120,7 +121,7 @@ function addImg(){
             ganarImg = "img/star3.jpg"
         }
 
-    imgLevel.sort(()=>Math.random()-0-5);
+    imgLevel.sort(() => Math.random() - 0.5);
 
     imgLevel.forEach((img, i)=>{
         let div = d.createElement("div");
@@ -192,13 +193,13 @@ function compareImg(){
     function changeTitleColors2() {
         const titles = document.querySelectorAll('.title');
         titles.forEach(title => {
-            title.style.color = '#f094a6';
+            title.style.color = '#f094a6'
             btn.style.background = "#f094a6"
         });
     }
 
-    //Comprobar si se adivinaron todas las imagenes
     if (level == 1 && points == 6) {
+        sonidoTiempo.pause();
         totalAttempts += attempts;
         totalTime += time;
         timeLeft += (60 - time);
@@ -230,7 +231,8 @@ function compareImg(){
         points2 = 0;
         showPoints2.textContent = `/8`;
         clearInterval(timePassed);
-        time = 30;
+        time = 50;
+        0;
         showTime.textContent = time;
         playing = false;        
         deleteImg();
@@ -255,6 +257,7 @@ function compareImg(){
                 confirmButton: 'custom-confirm-button2'
             }
         })
+        sonidoTiempo.pause();
         level++;
         showLevel.textContent = level;
         attempts = 0;
@@ -263,35 +266,45 @@ function compareImg(){
         showPoints.textContent = points;
         showPoints2.textContent = `/10`;
         clearInterval(timePassed);
-        time = 60;
+        time = 90;
         showTime.textContent = time;
         playing = false;        
         deleteImg();   
         changeTitleColors2();
        
     }
-    else if(level == 3 && points == 10){
+    if (level === 3 && points === 10) {
+        console.log("Nivel 3 completado");
+        sonidoTiempo.pause();
         sonidoVictoria.play();
+    
         Swal.fire({
             title: "Congratulations! You passed the game :D",
             width: 600,
             padding: "3em",
-            color: "#f094a6",
+            color: "#ff355d",
             background: "#fff url(./img/balloons.gif)",
             backdrop: `
-                #f094a6d4
-                url("./img/gif confetti.gif")
+                #f094a6d2
+                url("./img/balloons.gif"),
                 left top
                 no-repeat
             `,
-            confirmButtonText: 'Ok !',
+            confirmButtonText: 'Restart Game',
             customClass: {
                 confirmButton: 'custom-confirm-button3'
             }
-        })
-        
-       location.reload();
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Reiniciando juego después de victoria");
+                sonidoVictoria.pause(); 
+                sonidoVictoria.currentTime = 0;
+                location.reload();
+            }
+        });
+        clearInterval(timePassed);
     }
+    
 
 }
 
@@ -311,27 +324,29 @@ function level3(){
     timePlaying();
 }
 
-function timePlaying(){
-    timePassed = setInterval(()=>{
+function timePlaying() {
+    showTime.style.color = "#000";
+    showTime.style.fontSize = "16px"; 
+
+    timePassed = setInterval(() => {
         time--;
         showTime.textContent = time;
-        if(time == 11){
+        if (time == 11) {
             sonidoTiempo.play();
             alert("Go faster! Time is running out 🚨");
-            showTime.style.color = "#f03d30"
-            showTime.style.fontSize = "19px"
-        }else if (time == 0 && points != 6){
+            showTime.style.color = "#f03d30"; 
+            showTime.style.fontSize = "19px"; 
+        } else if (time == 0 && points != 6) {
             sonidoDerrota.play();
             alert("Time is over! You lost :(");
             clearInterval(timePassed);
-            setTimeout(()=>{
+            setTimeout(() => {
                 location.reload();
-            },1000);
-               
-    }
-},1000)   
-  
+            }, 1000);
+        }
+    }, 1000);
 }
+
 
 function deleteImg(){
     let deleteImages = d.querySelectorAll(".board div img");
